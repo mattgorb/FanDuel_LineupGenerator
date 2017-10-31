@@ -1,0 +1,40 @@
+
+	<div class="container">
+<h5>FanDuel lineup generator</h5>
+<h1>{{ title }}</h1>
+
+ <form [formGroup]="userForm" (ngSubmit)="submit(userForm.value)">
+	  <div class="row">
+	<label class="one columns">Position</label>
+   	<label class="three columns">Player</label>
+ 	<label class="two columns">Salary </label>
+ 	<label class="four columns">Average Points (optional)</label>
+ 	
+ 	 </div>
+    	
+    <div formGroupName="type">
+    <div formArrayName="options">
+      <div *ngFor="let child of userForm.controls.type.controls.options.controls; let i = index" >
+        <div formGroupName="{{i}}">
+
+	    <div class="row" style="padding:0.5%;">
+		<div class="one columns"  >		
+			<select formControlName="pos"  >
+			  <option *ngFor="let pos of positions" value= {{pos.pos}}>
+			    {{pos.pos}}
+			  </option>
+			</select>
+		</div>
+   		<input class="three columns u-full-width form-control" id="name" style="height:38px;padding:6px 10px;border:1px solid #D1D1D1;border-radius:4px;margin-left:5%;" formControlName="name" required >  
+			
+ 		<input class="two columns u-full-width" formControlName="salary"  type="salary" placeholder="7,000" id="exampleEmailInput"  style="height:38px;padding:6px 10px;border:1px solid #D1D1D1;border-radius:4px;margin-left:2.5%;">
+ 		<input class="two columns u-full-width" formControlName="average"  type="average" placeholder="15.2" id="exampleEmailInput"  style="height:38px;padding:6px 10px;border:1px solid #D1D1D1;border-radius:4px;margin-left:2.5%;">
+  	    </div>
+          </div>
+        </div>
+	<button type="button" (click)="addNewRow()" class="button">Add new Row</button>
+      </div>
+    </div>
+    <button class="button-primary" type="submit">Submit</button>
+    </form>
+</div>
